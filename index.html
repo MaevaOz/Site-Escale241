@@ -7,7 +7,7 @@
 
   <title>L'Escale 241 — Restaurant, Bar et Ambiance à Poitiers</title>
   <meta name="description" content="Restaurant-bar de nuit à Poitiers. Folong, bouillon de tripes et crabes, poisson au four, bières, vins et soirées avec DJ. Ouvert du mardi au dimanche, de 12h à 05h." />
-  <meta name="theme-color" content="#141413" />
+  <meta name="theme-color" content="#f7f2e8" />
   <link rel="canonical" href="https://lescale241.vercel.app/" />
 
   <meta property="og:type" content="website" />
@@ -62,17 +62,19 @@
   <style>
     /* CHARTE DESIGN (UI/UX Pro Max) */
     :root {
-      --fond: #141413;
-      --surface: #1e1e1c;
-      --surface-elevated: #282825;
+      --fond: #f7f2e8;
+      --fond-alt: #efe7d8;
+      --surface: #fffdf8;
+      --surface-elevated: #ebe2d1;
       --ocre: #d4821a;
       --ocre-hover: #b86e14;
-      --ocre-claire: rgba(212, 130, 26, 0.1);
-      --encre: #0e0e0d;
-      --trait: rgba(255, 255, 255, 0.1);
-      --trait-fort: rgba(255, 255, 255, 0.25);
-      --texte: #f5f6f4;
-      --texte-secondaire: #a6a6a1;
+      --ocre-texte: #8f5006;
+      --ocre-claire: rgba(212, 130, 26, 0.13);
+      --encre: #2b2218;
+      --trait: rgba(43, 34, 24, 0.13);
+      --trait-fort: rgba(43, 34, 24, 0.3);
+      --texte: #2b2218;
+      --texte-secondaire: #675c4d;
 
       --font-titre: 'Source Serif 4', Georgia, serif;
       --font-texte: 'Source Sans 3', system-ui, sans-serif;
@@ -88,6 +90,24 @@
       --arrondi-bouton: 8px;
       --arrondi-panneau: 16px;
       --vitesse: 0.3s;
+    }
+
+    /* Zones sombres : photo d'accueil, navigation au-dessus, pied de page */
+    #hero, footer, #navbar:not(.scrolled) {
+      --texte: #f7f3ea;
+      --texte-secondaire: #d9d3c6;
+      --trait: rgba(255, 255, 255, 0.14);
+      --trait-fort: rgba(255, 255, 255, 0.4);
+      --ocre-texte: #e39a3b;
+      --ocre-claire: rgba(212, 130, 26, 0.16);
+      color: var(--texte);
+    }
+    footer { --texte-secondaire: #bdb3a3; }
+    #navbar:has(.nav-burger.open) {
+      --texte: #2b2218;
+      --texte-secondaire: #675c4d;
+      --ocre-texte: #8f5006;
+      --trait: rgba(43, 34, 24, 0.13);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -107,7 +127,7 @@
     .chasse-fixe { font-variant-numeric: tabular-nums; }
 
     :focus-visible {
-      outline: 2px solid var(--ocre);
+      outline: 2px solid var(--ocre-texte);
       outline-offset: 3px;
     }
 
@@ -149,10 +169,10 @@
     }
 
     #navbar.scrolled {
-      background: rgba(20, 20, 19, 0.95);
+      background: rgba(247, 242, 232, 0.96);
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 24px rgba(43, 34, 24, 0.12);
       padding: 12px 40px;
       border-bottom: 1px solid var(--trait);
     }
@@ -197,8 +217,8 @@
 
     .nav-links a:not(.nav-cta):hover,
     .nav-links a:not(.nav-cta).active {
-      color: var(--ocre);
-      border-color: var(--ocre);
+      color: var(--ocre-texte);
+      border-color: var(--ocre-texte);
     }
 
     .nav-cta {
@@ -277,10 +297,11 @@
       padding: var(--espace-2) var(--espace-4);
     }
 
-    .mobile-menu a:not(.nav-cta):hover { color: var(--ocre); }
+    .mobile-menu a:not(.nav-cta):hover { color: var(--ocre-texte); }
 
     /* SECTION HERO */
     #hero {
+      background: #2b2218;
       min-height: 100vh;
       min-height: 100dvh;
       position: relative;
@@ -350,6 +371,7 @@
       align-items: center;
       justify-content: center;
       min-height: 48px;
+      gap: 0.35em;
       padding: 14px 36px;
       border-radius: var(--arrondi-bouton);
       font-size: 15px;
@@ -384,7 +406,7 @@
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--ocre);
+      color: var(--ocre-texte);
       margin-bottom: var(--espace-3);
     }
 
@@ -397,7 +419,7 @@
     }
 
     /* SECTION MENU (LA CARTE) */
-    #menu { background: var(--encre); }
+    #menu { background: var(--fond-alt); }
 
     .menu-tabs {
       display: flex;
@@ -425,8 +447,8 @@
 
     .menu-tab.active {
       background: var(--ocre-claire);
-      border-color: var(--ocre);
-      color: var(--ocre);
+      border-color: var(--ocre-texte);
+      color: var(--ocre-texte);
     }
 
     .menu-category { display: none; }
@@ -483,7 +505,7 @@
       font-family: var(--font-titre);
       font-size: 18px;
       font-weight: 700;
-      color: var(--ocre);
+      color: var(--ocre-texte);
       white-space: nowrap;
     }
 
@@ -495,7 +517,7 @@
 
     .formula-banner {
       grid-column: 1 / -1;
-      background: linear-gradient(135deg, var(--surface) 0%, var(--encre) 100%);
+      background: linear-gradient(135deg, var(--surface) 0%, var(--fond-alt) 100%);
       border: 1px dashed var(--ocre);
       border-radius: var(--arrondi-panneau);
       padding: var(--espace-6);
@@ -510,7 +532,7 @@
     .formula-content h3 {
       font-family: var(--font-titre);
       font-size: 24px;
-      color: var(--ocre);
+      color: var(--ocre-texte);
       margin-bottom: var(--espace-1);
     }
 
@@ -551,7 +573,7 @@
     }
 
     .event-feature-icon {
-      color: var(--ocre);
+      color: var(--ocre-texte);
       margin-top: 3px;
     }
 
@@ -623,7 +645,7 @@
     .galerie-item img { width: 100%; height: 100%; }
 
     /* INFOS PRATIQUES */
-    #infos { background: var(--encre); }
+    #infos { background: var(--fond-alt); }
 
     .infos-grid {
       display: grid;
@@ -649,7 +671,7 @@
     }
 
     .hours-status.is-open .hours-status-dot { background: var(--ocre); }
-    .hours-status.is-open { color: var(--ocre); }
+    .hours-status.is-open { color: var(--ocre-texte); }
 
     .hours-card {
       background: var(--surface);
@@ -733,7 +755,7 @@
     a.contact-card:hover { border-color: var(--trait-fort); }
 
     .contact-card-icon {
-      color: var(--ocre);
+      color: var(--ocre-texte);
       background: var(--ocre-claire);
       padding: var(--espace-2);
       border-radius: 8px;
@@ -913,7 +935,7 @@
         <h1 class="hero-title" data-s="hero_title">L'Escale 241</h1>
         <p class="hero-sub" data-s="hero_sub">Folong, bouillon de tripes et crabes, poisson au four, et des soirées avec DJ. Ouvert à Poitiers de midi à 05h du matin.</p>
         <div class="hero-btns">
-          <a href="tel:+33755232245" class="btn-primary" data-tel>Appeler le  <span data-s="phone">07 55 23 22 45</span></a>
+          <a href="tel:+33755232245" class="btn-primary" data-tel>Appeler le <span data-s="phone">07 55 23 22 45</span></a>
           <a href="#menu" class="btn-secondary">Voir la carte</a>
         </div>
       </div>
