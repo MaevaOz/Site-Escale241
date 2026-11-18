@@ -1313,7 +1313,7 @@
                 <span>Appel direct</span>
               </span>
             </a>
-            <a class="contact-card" data-maps href="https://www.google.com/maps/search/?api=1&amp;query=44+Rue+de+la+Provence+86000+Poitiers" target="_blank" rel="noopener noreferrer">
+            <a class="contact-card" data-maps href="https://www.google.com/maps/place/44+Rue+de+la+Provence,+86000+Poitiers/@46.5684785,0.3621437,17z" target="_blank" rel="noopener noreferrer">
               <span class="contact-card-icon">
                 <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
               </span>
@@ -1325,12 +1325,12 @@
           </div>
 
           <div>
-            <div class="map-card" id="mapCard" data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2732.1856338561706!2d0.36214371195610255!3d46.56847847098492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47fce538efb53297%3A0xe13fa6754020a10!2s44%20Rue%20de%20la%20Provence%2C%2086000%20Poitiers!5e0!3m2!1sfr!2sfr!4v1715014382740!5m2!1sfr!2sfr">
+            <div class="map-card" id="mapCard" data-src="https://www.google.com/maps?q=44+Rue+de+la+Provence,+86000+Poitiers&amp;hl=fr&amp;z=17&amp;output=embed">
               <div class="map-placeholder">
                 <p>La carte est fournie par Google Maps. Son affichage transmet votre adresse IP à Google.</p>
                 <div class="map-actions">
                   <button class="btn-primary" type="button" id="mapLoad">Afficher la carte</button>
-                  <a class="btn-secondary" data-maps href="https://www.google.com/maps/search/?api=1&amp;query=44+Rue+de+la+Provence+86000+Poitiers" target="_blank" rel="noopener noreferrer">Ouvrir dans Maps</a>
+                  <a class="btn-secondary" data-maps href="https://www.google.com/maps/place/44+Rue+de+la+Provence,+86000+Poitiers/@46.5684785,0.3621437,17z" target="_blank" rel="noopener noreferrer">Ouvrir dans Maps</a>
                 </div>
               </div>
             </div>
@@ -1616,8 +1616,10 @@
 
         var adresse = ((S.address_line1 || '') + ' ' + (S.address_line2 || '')).trim();
         if (adresse) {
-          var maps = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(adresse);
+          var maps = 'https://www.google.com/maps/place/' + encodeURIComponent(adresse);
           qa('[data-maps]').forEach(function (a) { a.href = maps; });
+          var carte = document.getElementById('mapCard');
+          if (carte) carte.setAttribute('data-src', 'https://www.google.com/maps?q=' + encodeURIComponent(adresse) + '&hl=fr&z=17&output=embed');
         }
 
         var bg = $('.hero-bg');
