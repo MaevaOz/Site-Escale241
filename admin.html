@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#141413" />
+  <title>Administration — L'Escale 241</title>
+  <link rel="icon" type="image/png" href="image_24.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --fond: #141413;
+      --surface: #1e1e1c;
+      --surface-elevated: #282825;
+      --ocre: #d4821a;
+      --ocre-hover: #b86e14;
+      --ocre-claire: rgba(212, 130, 26, 0.1);
+      --encre: #0e0e0d;
+      --trait: rgba(255, 255, 255, 0.1);
+      --trait-fort: rgba(255, 255, 255, 0.25);
+      --texte: #f5f6f4;
+      --texte-secondaire: #a6a6a1;
+      --alerte: #ee9c8a;
+
+      --font-titre: 'Source Serif 4', Georgia, serif;
+      --font-texte: 'Source Sans 3', system-ui, sans-serif;
+
+      --arrondi-bouton: 8px;
+      --arrondi-panneau: 16px;
+      --vitesse: 0.3s;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    [hidden] { display: none !important; }
+    body {
+      font-family: var(--font-texte);
+      background: var(--fond);
+      color: var(--texte);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    button { font-family: inherit; }
+
+    :focus-visible { outline: 2px solid var(--ocre); outline-offset: 3px; }
+
+    /* Connexion */
+    .ecran { min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; padding: 24px; }
+    .carte-login {
+      width: 100%;
+      max-width: 400px;
+      background: var(--surface);
+      border: 1px solid var(--trait);
+      border-radius: var(--arrondi-panneau);
+      padding: 32px;
+    }
+    h1 { font-family: var(--font-titre); font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+    .sous-titre { color: var(--texte-secondaire); margin-bottom: 24px; }
+    .erreur { color: var(--alerte); min-height: 24px; margin-bottom: 8px; font-size: 14px; }
+
+    /* Champs */
+    .champ { display: grid; gap: 6px; margin-bottom: 16px; }
+    .champ > span { font-size: 14px; font-weight: 600; color: var(--texte-secondaire); }
+    input[type="text"], input[type="email"], input[type="password"], input[type="time"], textarea {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 12px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--trait-fort);
+      border-radius: var(--arrondi-bouton);
+      color: var(--texte);
+      font: inherit;
+      font-size: 16px;
+    }
+    textarea { min-height: 88px; resize: vertical; }
+    input:disabled { opacity: 0.45; }
+
+    .case { display: flex; align-items: center; gap: 10px; min-height: 44px; cursor: pointer; }
+    .case input { width: 22px; height: 22px; accent-color: var(--ocre); flex-shrink: 0; }
+
+    /* Boutons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 20px;
+      border-radius: var(--arrondi-bouton);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background var(--vitesse), border-color var(--vitesse), color var(--vitesse);
+    }
+    .btn-prim { background: var(--ocre); color: var(--encre); }
+    .btn-prim:hover { background: var(--ocre-hover); }
+    .btn-sec { background: transparent; color: var(--texte); border-color: var(--trait-fort); }
+    .btn-sec:hover { border-color: var(--ocre); }
+    .btn-danger { background: transparent; color: var(--alerte); border-color: rgba(238, 156, 138, 0.4); }
+    .btn-danger:hover { border-color: var(--alerte); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .cache { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+    label.btn:focus-within { outline: 2px solid var(--ocre); outline-offset: 3px; }
+
+    /* Application */
+    .barre {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 12px 20px;
+      background: rgba(20, 20, 19, 0.95);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--trait);
+    }
+    .marque { font-family: var(--font-titre); font-size: 20px; font-weight: 700; }
+    .barre-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .barre-actions a { font-size: 14px; color: var(--texte-secondaire); padding: 10px 8px; }
+    .barre-actions a:hover { color: var(--ocre); }
+
+    .onglets {
+      display: flex;
+      gap: 8px;
+      padding: 16px 20px 0;
+      max-width: 860px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    .onglet {
+      min-height: 44px;
+      padding: 10px 22px;
+      border-radius: 50px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--texte-secondaire);
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background var(--vitesse), border-color var(--vitesse), color var(--vitesse);
+    }
+    .onglet:hover { color: var(--texte); }
+    .onglet.actif { background: var(--ocre-claire); border-color: var(--ocre); color: var(--ocre); }
+
+    main { max-width: 860px; margin: 0 auto; padding: 20px 20px 120px; }
+    h2 { font-family: var(--font-titre); font-size: 24px; font-weight: 600; margin: 8px 0 16px; }
+    h3 { font-size: 17px; margin-bottom: 8px; }
+    .aide { color: var(--texte-secondaire); font-size: 14px; margin-bottom: 16px; }
+
+    .bloc {
+      background: var(--surface);
+      border: 1px solid var(--trait);
+      border-radius: var(--arrondi-panneau);
+      padding: 20px;
+      margin-bottom: 16px;
+      min-width: 0;
+    }
+    fieldset.bloc { border: 1px solid var(--trait); }
+    legend {
+      font-family: var(--font-titre);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--ocre);
+      padding: 0 8px;
+    }
+
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .cases { display: flex; gap: 8px 24px; flex-wrap: wrap; }
+
+    .barre-save {
+      position: sticky;
+      bottom: 0;
+      padding: 12px 0;
+      background: linear-gradient(to top, var(--fond) 70%, transparent);
+    }
+
+    /* Carte */
+    .item {
+      background: var(--surface-elevated);
+      border: 1px solid var(--trait);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .item-ligne { display: grid; grid-template-columns: 1fr 120px; gap: 12px; }
+    .photo-ligne { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+    .mini { width: 64px; height: 64px; border-radius: 10px; object-fit: cover; border: 1px solid var(--trait); }
+    .apercu { width: 100%; max-width: 360px; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; border: 1px solid var(--trait); margin-bottom: 12px; }
+
+    /* Horaires */
+    .heure-ligne {
+      display: grid;
+      grid-template-columns: 110px 1fr 1fr 1fr;
+      gap: 12px;
+      align-items: end;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--trait);
+    }
+    .heure-ligne:last-of-type { border-bottom: none; }
+    .heure-ligne .champ { margin-bottom: 0; }
+    .heure-ligne strong { padding-bottom: 12px; }
+
+    /* Galerie */
+    .photo { display: grid; grid-template-columns: 120px 1fr; gap: 16px; align-items: start; padding: 12px 0; border-bottom: 1px solid var(--trait); }
+    .photo .apercu { max-width: 120px; margin: 0; }
+    .photo:last-child { border-bottom: none; }
+
+    #toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%);
+      z-index: 100;
+      max-width: calc(100% - 32px);
+      padding: 12px 20px;
+      border-radius: var(--arrondi-bouton);
+      background: var(--ocre);
+      color: var(--encre);
+      font-weight: 600;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    }
+    #toast.err { background: var(--alerte); }
+
+    @media (max-width: 640px) {
+      .item-ligne { grid-template-columns: 1fr; }
+      .heure-ligne { grid-template-columns: 1fr 1fr; }
+      .heure-ligne strong { grid-column: 1 / -1; padding-bottom: 0; }
+      .photo { grid-template-columns: 88px 1fr; }
+      .photo .apercu { max-width: 88px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CONNEXION -->
+  <div class="ecran" id="login">
+    <form class="carte-login" id="loginForm">
+      <h1>Administration</h1>
+      <p class="sous-titre">L'Escale 241</p>
+      <label class="champ"><span>Email</span><input type="email" id="email" autocomplete="username" required /></label>
+      <label class="champ"><span>Mot de passe</span><input type="password" id="mdp" autocomplete="current-password" required /></label>
+      <p class="erreur" id="loginErreur" role="alert"></p>
+      <button class="btn btn-prim" type="submit" id="loginBtn" style="width:100%">Se connecter</button>
+    </form>
+  </div>
+
+  <!-- APPLICATION -->
+  <div id="app" hidden>
+    <header class="barre">
+      <span class="marque">L'Escale 241 · Administration</span>
+      <div class="barre-actions">
+        <a href="index.html" target="_blank" rel="noopener">Voir le site</a>
+        <button class="btn btn-sec" type="button" id="logout">Déconnexion</button>
+      </div>
+    </header>
+
+    <div class="onglets" role="tablist" aria-label="Sections du site">
+      <button class="onglet actif" type="button" role="tab" id="o-textes" aria-selected="true" aria-controls="p-textes">Textes</button>
+      <button class="onglet" type="button" role="tab" id="o-carte" aria-selected="false" aria-controls="p-carte">Carte</button>
+      <button class="onglet" type="button" role="tab" id="o-horaires" aria-selected="false" aria-controls="p-horaires">Horaires</button>
+      <button class="onglet" type="button" role="tab" id="o-photos" aria-selected="false" aria-controls="p-photos">Photos</button>
+    </div>
+
+    <main>
+      <section id="p-textes" role="tabpanel" aria-labelledby="o-textes">
+        <h2>Textes du site</h2>
+        <p class="aide">Modifiez les textes, puis cliquez sur Enregistrer. Un champ laissé vide n'est pas affiché sur le site.</p>
+        <div id="textesForm"></div>
+        <div class="barre-save"><button class="btn btn-prim" type="button" id="saveTextes">Enregistrer les textes</button></div>
+      </section>
+
+      <section id="p-carte" role="tabpanel" aria-labelledby="o-carte" hidden>
+        <h2>La carte</h2>
+        <p class="aide">Chaque modification est enregistrée dès que vous quittez le champ. Les plats masqués restent ici mais n'apparaissent pas sur le site.</p>
+        <div id="carteList"></div>
+        <button class="btn btn-prim" type="button" id="addCat">Ajouter une catégorie</button>
+      </section>
+
+      <section id="p-horaires" role="tabpanel" aria-labelledby="o-horaires" hidden>
+        <h2>Horaires d'ouverture</h2>
+        <p class="aide">Si l'heure de fermeture est plus petite que l'heure d'ouverture (par exemple 05:00), la fermeture a lieu le lendemain.</p>
+        <div class="bloc" id="horairesList"></div>
+        <div class="barre-save"><button class="btn btn-prim" type="button" id="saveHoraires">Enregistrer les horaires</button></div>
+      </section>
+
+      <section id="p-photos" role="tabpanel" aria-labelledby="o-photos" hidden>
+        <h2>Photos</h2>
+        <p class="aide">Les photos sont réduites et converties automatiquement pour que le site reste rapide.</p>
+        <div id="photosSingles"></div>
+        <div class="bloc">
+          <h3>Galerie</h3>
+          <p class="aide">Renseignez une description pour chaque photo (utile aux personnes malvoyantes et à Google).</p>
+          <div id="galerieList"></div>
+          <div class="actions" id="galerieAdd"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="config.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    var CFG = window.ESCALE_CONFIG || {};
+    var BASE = (CFG.SUPABASE_URL || '').replace(/\/$/, '');
+    var KEY = CFG.SUPABASE_ANON_KEY || '';
+    var BUCKET = 'site-images';
+    var PUBLIC_PREFIX = BASE + '/storage/v1/object/public/' + BUCKET + '/';
+    var JOURS = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+    var ORDRE = [1, 2, 3, 4, 5, 6, 0];
+
+    var TEXT_GROUPS = [
+      { titre: 'Accueil', champs: [
+        ['hero_tag', 'Étiquette au-dessus du titre'],
+        ['hero_title', 'Titre principal'],
+        ['hero_sub', 'Texte d’introduction', 'area']
+      ] },
+      { titre: 'Carte', champs: [
+        ['menu_title', 'Titre de la section'],
+        ['formula_title', 'Formule : titre'],
+        ['formula_text', 'Formule : description', 'area'],
+        ['formula_price', 'Formule : prix en euros (exemple : 10)'],
+        ['alcohol_note', 'Mention sur l’alcool', 'area']
+      ] },
+      { titre: 'Événements', champs: [
+        ['events_title', 'Titre de la section'],
+        ['events_text', 'Texte de présentation', 'area'],
+        ['event1_title', 'Première ligne : titre'],
+        ['event1_text', 'Première ligne : texte', 'area'],
+        ['event2_title', 'Deuxième ligne : titre'],
+        ['event2_text', 'Deuxième ligne : texte', 'area'],
+        ['events_badge', 'Étiquette sur la photo'],
+        ['events_overlay_title', 'Texte sur la photo']
+      ] },
+      { titre: 'Galerie', champs: [
+        ['galerie_title', 'Titre de la section']
+      ] },
+      { titre: 'Infos pratiques', champs: [
+        ['infos_title', 'Titre de la section'],
+        ['phone', 'Téléphone (exemple : 07 55 23 22 45)'],
+        ['address_line1', 'Adresse : rue'],
+        ['address_line2', 'Adresse : code postal et ville']
+      ] },
+      { titre: 'Pied de page et mentions légales', champs: [
+        ['footer_text', 'Texte de présentation', 'area'],
+        ['legal_publisher', 'Responsable de la publication'],
+        ['legal_siret', 'Numéro SIRET']
+      ] }
+    ];
+
+    window.addEventListener('unhandledrejection', function (e) { e.preventDefault(); });
+
+    var S = { settings: {}, cats: [], items: [], hours: {}, photos: [] };
+    var session = null;
+
+    /* ---------- Outils ---------- */
+    function $(s, r) { return (r || document).querySelector(s); }
+
+    function h(tag, props) {
+      var e = document.createElement(tag);
+      var p = props || {};
+      Object.keys(p).forEach(function (k) {
+        var v = p[k];
+        if (k === 'class') e.className = v;
+        else if (k.indexOf('on') === 0) e.addEventListener(k.slice(2), v);
+        else if (v === true) e.setAttribute(k, '');
+        else if (v !== false && v !== null && v !== undefined) e.setAttribute(k, v);
+      });
+      Array.prototype.slice.call(arguments, 2).forEach(function add(c) {
+        if (c === null || c === undefined || c === false) return;
+        if (Array.isArray(c)) { c.forEach(add); return; }
+        e.append(c.nodeType ? c : document.createTextNode(String(c)));
+      });
+      return e;
+    }
+
+    var toastTimer = null;
+    function toast(msg, err) {
+      var t = $('#toast');
+      t.textContent = msg;
+      t.className = err ? 'err' : '';
+      t.hidden = false;
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { t.hidden = true; }, err ? 6000 : 2500);
+    }
+
+    function msgErreur(e) {
+      var m = String((e && e.message) || e);
+      if (/row-level security|permission denied|42501|\b403\b/i.test(m)) {
+        return 'Ce compte n’a pas le droit de modifier le site. Vérifiez l’email indiqué dans le fichier SQL.';
+      }
+      if (/Failed to fetch|NetworkError|Load failed/i.test(m)) return 'Connexion impossible. Vérifiez votre réseau.';
+      return m.slice(0, 200);
+    }
+
+    function byPos(a, b) { return a.position - b.position; }
+
+    function champ(label, control) { return h('label', { class: 'champ' }, h('span', {}, label), control); }
+
+    function caseCoche(label, checked, onChange) {
+      var input = h('input', { type: 'checkbox', checked: !!checked });
+      input.addEventListener('change', function () { onChange(input.checked); });
+      return h('label', { class: 'case' }, input, h('span', {}, label));
+    }
+
+    function btn(label, fn, kind, disabled) {
+      return h('button', { class: 'btn btn-' + (kind || 'sec'), type: 'button', disabled: !!disabled, onclick: fn }, label);
+    }
+
+    function fileButton(text, multiple, cb) {
+      var input = h('input', { type: 'file', accept: 'image/*', class: 'cache' });
+      if (multiple) input.multiple = true;
+      input.addEventListener('change', function () {
+        var files = Array.prototype.slice.call(input.files);
+        input.value = '';
+        if (files.length) cb(files);
+      });
+      return h('label', { class: 'btn btn-sec' }, text, input);
+    }
+
+    /* ---------- Session et API ---------- */
+    function saveSession(j) {
+      session = {
+        access_token: j.access_token,
+        refresh_token: j.refresh_token,
+        expires_at: Date.now() + Math.max(60, (j.expires_in || 3600) - 60) * 1000,
+        email: (j.user && j.user.email) || (session && session.email) || ''
+      };
+      localStorage.setItem('escale_admin', JSON.stringify(session));
+    }
+
+    function auth(grant, body) {
+      return fetch(BASE + '/auth/v1/token?grant_type=' + grant, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: KEY },
+        body: JSON.stringify(body)
+      }).then(function (r) {
+        return r.json().then(function (j) {
+          if (!r.ok) throw new Error(j.error_description || j.msg || j.message || 'Connexion refusée');
+          return j;
+        });
+      });
+    }
+
+    function token() {
+      if (!session) return Promise.reject(new Error('Session expirée'));
+      if (Date.now() < session.expires_at) return Promise.resolve(session.access_token);
+      return auth('refresh_token', { refresh_token: session.refresh_token }).then(function (j) {
+        saveSession(j);
+        return session.access_token;
+      });
+    }
+
+    function rest(method, path, body, extra) {
+      return token().then(function (t) {
+        var headers = { apikey: KEY, Authorization: 'Bearer ' + t };
+        if (body !== undefined) headers['Content-Type'] = 'application/json';
+        Object.keys(extra || {}).forEach(function (k) { headers[k] = extra[k]; });
+        return fetch(BASE + '/rest/v1/' + path, {
+          method: method,
+          headers: headers,
+          body: body !== undefined ? JSON.stringify(body) : undefined
+        });
+      }).then(function (r) {
+        return r.text().then(function (txt) {
+          if (!r.ok) throw new Error(txt || String(r.status));
+          return txt ? JSON.parse(txt) : null;
+        });
+      });
+    }
+
+    var MIN = { Prefer: 'return=minimal' };
+    var REP = { Prefer: 'return=representation' };
+    var UPSERT = { Prefer: 'resolution=merge-duplicates,return=minimal' };
+
+    /* ---------- Images ---------- */
+    function toBlob(file, maxW) {
+      return createImageBitmap(file).then(function (bmp) {
+        var scale = Math.min(1, maxW / bmp.width);
+        var c = document.createElement('canvas');
+        c.width = Math.round(bmp.width * scale);
+        c.height = Math.round(bmp.height * scale);
+        c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+        return new Promise(function (res) { c.toBlob(res, 'image/webp', 0.82); });
+      }).then(function (blob) {
+        if (!blob) throw new Error('Image illisible');
+        return blob;
+      });
+    }
+
+    function upload(blob, dossier) {
+      var ext = blob.type === 'image/webp' ? 'webp' : blob.type === 'image/png' ? 'png' : 'jpg';
+      var path = dossier + '/' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.' + ext;
+      return token().then(function (t) {
+        return fetch(BASE + '/storage/v1/object/' + BUCKET + '/' + path, {
+          method: 'POST',
+          headers: { apikey: KEY, Authorization: 'Bearer ' + t, 'Content-Type': blob.type, 'x-upsert': 'false' },
+          body: blob
+        });
+      }).then(function (r) {
+        return r.text().then(function (txt) {
+          if (!r.ok) throw new Error(txt || String(r.status));
+          return PUBLIC_PREFIX + path;
+        });
+      });
+    }
+
+    function removeFile(url) {
+      if (!url || url.indexOf(PUBLIC_PREFIX) !== 0) return Promise.resolve();
+      var path = url.slice(PUBLIC_PREFIX.length);
+      return token().then(function (t) {
+        return fetch(BASE + '/storage/v1/object/' + BUCKET, {
+          method: 'DELETE',
+          headers: { apikey: KEY, Authorization: 'Bearer ' + t, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prefixes: [path] })
+        });
+      }).catch(function () { /* fichier orphelin : sans gravité */ });
+    }
+
+    function envoyerPhoto(file, maxW, dossier) {
+      toast('Envoi de la photo en cours');
+      return toBlob(file, maxW).then(function (b) { return upload(b, dossier); });
+    }
+
+    /* ---------- Enregistrement générique ---------- */
+    function patchRow(table, row, obj) {
+      return rest('PATCH', table + '?id=eq.' + row.id, obj, MIN).then(function () {
+        Object.assign(row, obj);
+        toast('Enregistré');
+      }).catch(function (e) { toast(msgErreur(e), true); throw e; });
+    }
+
+    function move(table, list, i, d, after) {
+      var j = i + d;
+      if (j < 0 || j >= list.length) return;
+      var tmp = list[i]; list[i] = list[j]; list[j] = tmp;
+      var chain = Promise.resolve();
+      list.forEach(function (row, k) {
+        if (row.position !== k) {
+          chain = chain.then(function () {
+            return rest('PATCH', table + '?id=eq.' + row.id, { position: k }, MIN).then(function () { row.position = k; });
+          });
+        }
+      });
+      chain.then(function () { toast('Ordre enregistré'); }).catch(function (e) { toast(msgErreur(e), true); }).then(after);
+    }
+
+    function saveSetting(key, value) {
+      return rest('POST', 'site_settings?on_conflict=key', [{ key: key, value: value }], UPSERT).then(function () {
+        S.settings[key] = value;
+      });
+    }
+
+    /* ---------- Textes ---------- */
+    function renderTextes() {
+      var root = $('#textesForm');
+      root.replaceChildren();
+      TEXT_GROUPS.forEach(function (g) {
+        root.append(h('fieldset', { class: 'bloc' },
+          h('legend', {}, g.titre),
+          g.champs.map(function (c) {
+            var control = c[2] === 'area'
+              ? h('textarea', { rows: 3, 'data-key': c[0] }, S.settings[c[0]] || '')
+              : h('input', { type: 'text', 'data-key': c[0], value: S.settings[c[0]] || '' });
+            return champ(c[1], control);
+          })
+        ));
+      });
+    }
+
+    $('#saveTextes').addEventListener('click', function () {
+      var rows = Array.prototype.slice.call(document.querySelectorAll('#textesForm [data-key]')).map(function (e) {
+        return { key: e.getAttribute('data-key'), value: e.value.trim() };
+      });
+      rest('POST', 'site_settings?on_conflict=key', rows, UPSERT).then(function () {
+        rows.forEach(function (r) { S.settings[r.key] = r.value; });
+        toast('Textes enregistrés');
+      }).catch(function (e) { toast(msgErreur(e), true); });
+    });
+
+    /* ---------- Carte ---------- */
+    function prixTexte(p) { return p === null || p === undefined ? '' : String(p).replace('.', ','); }
+    function parsePrix(s) {
+      var t = String(s).replace(/\s|€/g, '').replace(',', '.');
+      if (t === '') return null;
+      var n = Number(t);
+      return isFinite(n) && n >= 0 ? n : undefined;
+    }
+
+    function renderCarte() {
+      var root = $('#carteList');
+      root.replaceChildren();
+      var cats = S.cats.slice().sort(byPos);
+      if (!cats.length) root.append(h('p', { class: 'aide' }, 'Aucune catégorie pour le moment.'));
+
+      cats.forEach(function (c, ci) {
+        var items = S.items.filter(function (i) { return i.category_id === c.id; }).sort(byPos);
+        root.append(h('section', { class: 'bloc' },
+          champ('Nom de la catégorie', h('input', {
+            type: 'text', value: c.name,
+            onchange: function (e) {
+              var v = e.target.value.trim();
+              if (!v) { e.target.value = c.name; return; }
+              patchRow('menu_categories', c, { name: v });
+            }
+          })),
+          h('div', { class: 'cases' },
+            caseCoche('Afficher la formule dans cette catégorie', c.show_formula, function (v) { patchRow('menu_categories', c, { show_formula: v }); }),
+            caseCoche('Afficher la mention sur l’alcool', c.show_alcohol, function (v) { patchRow('menu_categories', c, { show_alcohol: v }); })
+          ),
+          h('div', { class: 'actions' },
+            btn('Monter la catégorie', function () { move('menu_categories', cats, ci, -1, renderCarte); }, 'sec', ci === 0),
+            btn('Descendre la catégorie', function () { move('menu_categories', cats, ci, 1, renderCarte); }, 'sec', ci === cats.length - 1),
+            btn('Supprimer la catégorie', function () { delCat(c, items); }, 'danger')
+          ),
+          h('h3', { style: 'margin-top:20px' }, 'Plats et boissons (' + items.length + ')'),
+          items.map(function (it, ii) { return itemCard(it, items, ii); }),
+          btn('Ajouter un plat ou une boisson', function () { addItem(c); }, 'prim')
+        ));
+      });
+    }
+
+    function itemCard(it, list, i) {
+      return h('article', { class: 'item' },
+        h('div', { class: 'item-ligne' },
+          champ('Nom', h('input', {
+            type: 'text', value: it.name,
+            onchange: function (e) {
+              var v = e.target.value.trim();
+              if (!v) { e.target.value = it.name; return; }
+              patchRow('menu_items', it, { name: v });
+            }
+          })),
+          champ('Prix (€)', h('input', {
+            type: 'text', inputmode: 'decimal', value: prixTexte(it.price),
+            onchange: function (e) {
+              var v = parsePrix(e.target.value);
+              if (v === undefined) { toast('Prix invalide', true); e.target.value = prixTexte(it.price); return; }
+              patchRow('menu_items', it, { price: v });
+            }
+          }))
+        ),
+        champ('Description (facultatif)', h('textarea', {
+          rows: 2,
+          onchange: function (e) { patchRow('menu_items', it, { description: e.target.value.trim() }); }
+        }, it.description || '')),
+        h('div', { class: 'cases' },
+          caseCoche('Visible sur le site', it.visible, function (v) { patchRow('menu_items', it, { visible: v }); })
+        ),
+        h('div', { class: 'photo-ligne' },
+          it.image_url ? h('img', { class: 'mini', src: it.image_url, alt: '' }) : null,
+          fileButton(it.image_url ? 'Changer la photo' : 'Ajouter une photo', false, function (files) { setItemPhoto(it, files[0]); }),
+          it.image_url ? btn('Retirer la photo', function () { removeItemPhoto(it); }, 'sec') : null
+        ),
+        h('div', { class: 'actions' },
+          btn('Monter', function () { move('menu_items', list, i, -1, renderCarte); }, 'sec', i === 0),
+          btn('Descendre', function () { move('menu_items', list, i, 1, renderCarte); }, 'sec', i === list.length - 1),
+          btn('Supprimer', function () { delItem(it); }, 'danger')
+        )
+      );
+    }
+
+    function setItemPhoto(it, file) {
+      var ancien = it.image_url;
+      envoyerPhoto(file, 700, 'plats').then(function (url) {
+        return patchRow('menu_items', it, { image_url: url });
+      }).then(function () { removeFile(ancien); renderCarte(); })
+        .catch(function (e) { toast(msgErreur(e), true); });
+    }
+
+    function removeItemPhoto(it) {
+      var ancien = it.image_url;
+      patchRow('menu_items', it, { image_url: '' }).then(function () { removeFile(ancien); renderCarte(); });
+    }
+
+    function addItem(c) {
+      var pos = S.items.filter(function (i) { return i.category_id === c.id; })
+        .reduce(function (m, i) { return Math.max(m, i.position + 1); }, 0);
+      rest('POST', 'menu_items', { category_id: c.id, name: 'Nouveau plat', price: null, position: pos }, REP).then(function (rows) {
+        S.items.push(rows[0]);
+        renderCarte();
+        toast('Plat ajouté : renseignez son nom et son prix');
+      }).catch(function (e) { toast(msgErreur(e), true); });
+    }
+
+    function delItem(it) {
+      if (!window.confirm('Supprimer « ' + it.name + ' » ? Cette action est définitive.')) return;
+      rest('DELETE', 'menu_items?id=eq.' + it.id, undefined, MIN).then(function () {
+        S.items = S.items.filter(function (i) { return i.id !== it.id; });
+        removeFile(it.image_url);
+        renderCarte();
+        toast('Supprimé');
+      }).catch(function (e) { toast(msgErreur(e), true); });
+    }
+
+    function addCat() {
+      var pos = S.cats.reduce(function (m, c) { return Math.max(m, c.position + 1); }, 0);
+      rest('POST', 'menu_categories', { name: 'Nouvelle catégorie', position: pos }, REP).then(function (rows) {
+        S.cats.push(rows[0]);
+        renderCarte();
+        toast('Catégorie ajoutée : donnez-lui un nom');
+      }).catch(function (e) { toast(msgErreur(e), true); });
+    }
+
+    function delCat(c, items) {
+      var msg = 'Supprimer la catégorie « ' + c.name + ' »' +
+        (items.length ? ' et ses ' + items.length + ' plat(s) ? Cette action est définitive.' : ' ?');
+      if (!window.confirm(msg)) return;
+      rest('DELETE', 'menu_categories?id=eq.' + c.id, undefined, MIN).then(function () {
+        items.forEach(function (i) { removeFile(i.image_url); });
+        S.cats = S.cats.filter(function (x) { return x.id !== c.id; });
+        S.items = S.items.filter(function (i) { return i.category_id !== c.id; });
+        renderCarte();
+        toast('Catégorie supprimée');
+      }).catch(function (e) { toast(msgErreur(e), true); });
+    }
+    $('#addCat').addEventListener('click', addCat);
+
+    /* ---------- Horaires ---------- */
+    function renderHoraires() {
+      var root = $('#horairesList');
+      root.replaceChildren();
+      ORDRE.forEach(function (d) {
+        var r = S.hours[d];
+        var ouv = h('input', { type: 'time', value: r.opens, disabled: r.closed, onchange: function (e) { r.opens = e.target.value; } });
+        var fer = h('input', { type: 'time', value: r.closes, disabled: r.closed, onchange: function (e) { r.closes = e.target.value; } });
+        root.append(h('div', { class: 'heure-ligne' },
+          h('strong', {}, JOURS[d]),
+          caseCoche('Fermé', r.closed, function (v) { r.closed = v; ouv.disabled = v; fer.disabled = v; }),
+          champ('Ouverture', ouv),
+          champ('Fermeture', fer)
+        ));
+      });
+    }
+
+    $('#saveHoraires').addEventListener('click', function () {
+      var rows = ORDRE.map(function (d) {
+        var r = S.hours[d];
+        return { day: d, closed: !!r.closed, opens: r.opens || '12:00', closes: r.closes || '05:00' };
+      });
+      rest('POST', 'opening_hours?on_conflict=day', rows, UPSERT).then(function () {
+        toast('Horaires enregistrés');
+      }).catch(function (e) { toast(msgErreur(e), true); });
+    });
+
+    /* ---------- Photos ---------- */
+    function singlePhoto(key, label, aide, maxW) {
+      var box = h('div', { class: 'bloc' });
+      function draw() {
+        var url = S.settings[key];
+        box.replaceChildren(
+          h('h3', {}, label),
+          h('p', { class: 'aide' }, aide),
+          url ? h('img', { class: 'apercu', src: url, alt: '' }) : h('p', { class: 'aide' }, 'Aucune photo.'),
+          h('div', { class: 'actions' },
+            fileButton(url ? 'Remplacer la photo' : 'Ajouter une photo', false, function (files) {
+              var ancien = S.settings[key];
+              envoyerPhoto(files[0], maxW, key).then(function (nouvelle) {
+                return saveSetting(key, nouvelle).then(function () { removeFile(ancien); draw(); toast('Photo enregistrée'); });
+              }).catch(function (e) { toast(msgErreur(e), true); });
+            }),
+            url ? btn('Retirer la photo', function () {
+              var ancien = S.settings[key];
+              saveSetting(key, '').then(function () { removeFile(ancien); draw(); toast('Photo retirée'); })
+                .catch(function (e) { toast(msgErreur(e), true); });
+            }, 'danger') : null
+          )
+        );
+      }
+      draw();
+      return box;
+    }
+
+    function renderPhotos() {
+      var s = $('#photosSingles');
+      s.replaceChildren(
+        singlePhoto('hero_image', 'Image de fond de l’accueil', 'Photo large, de préférence horizontale. Elle est assombrie automatiquement derrière le titre.', 1920),
+        singlePhoto('events_image', 'Photo de la section Événements', 'Photo horizontale (format 4/3).', 1400)
+      );
+      renderGalerie();
+      var add = $('#galerieAdd');
+      add.replaceChildren(fileButton('Ajouter des photos', true, addPhotos));
+    }
+
+    function renderGalerie() {
+      var root = $('#galerieList');
+      root.replaceChildren();
+      var list = S.photos.slice().sort(byPos);
+      if (!list.length) {
+        root.append(h('p', { class: 'aide' }, 'Aucune photo. La section Galerie est masquée sur le site tant qu’elle est vide.'));
+      }
+      list.forEach(function (p, i) {
+        root.append(h('article', { class: 'photo' },
+          h('img', { class: 'apercu', src: p.url, alt: p.alt || '' }),
+          h('div', {},
+            champ('Description de la photo', h('input', {
+              type: 'text', value: p.alt || '',
+              onchange: function (e) { patchRow('gallery_photos', p, { alt: e.target.value.trim() }); }
+            })),
+            h('div', { class: 'actions' },
+              btn('Monter', function () { move('gallery_photos', list, i, -1, renderGalerie); }, 'sec', i === 0),
+              btn('Descendre', function () { move('gallery_photos', list, i, 1, renderGalerie); }, 'sec', i === list.length - 1),
+              btn('Supprimer', function () { delPhoto(p); }, 'danger')
+            )
+          )
+        ));
+      });
+    }
+
+    function addPhotos(files) {
+      var chain = Promise.resolve();
+      files.forEach(function (file) {
+        chain = chain.then(function () {
+          return envoyerPhoto(file, 1400, 'galerie').then(function (url) {
+            var pos = S.photos.reduce(function (m, p) { return Math.max(m, p.position + 1); }, 0);
+            return rest('POST', 'gallery_photos', { url: url, alt: '', position: pos }, REP);
+          }).then(function (rows) { S.photos.push(rows[0]); });
+        });
+      });
+      chain.then(function () {
+        renderGalerie();
+        toast('Photos ajoutées : pensez à les décrire');
+      }).catch(function (e) { renderGalerie(); toast(msgErreur(e), true); });
+    }
+
+    function delPhoto(p) {
+      if (!window.confirm('Supprimer cette photo de la galerie ?')) return;
+      rest('DELETE', 'gallery_photos?id=eq.' + p.id, undefined, MIN).then(function () {
+        S.photos = S.photos.filter(function (x) { return x.id !== p.id; });
+        removeFile(p.url);
+        renderGalerie();
+        toast('Photo supprimée');
+      }).catch(function (e) { toast(msgErreur(e), true); });
+    }
+
+    /* ---------- Onglets ---------- */
+    var onglets = Array.prototype.slice.call(document.querySelectorAll('.onglet'));
+    onglets.forEach(function (o) {
+      o.addEventListener('click', function () {
+        onglets.forEach(function (x) {
+          var on = x === o;
+          x.classList.toggle('actif', on);
+          x.setAttribute('aria-selected', String(on));
+          document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
+        });
+      });
+    });
+
+    /* ---------- Démarrage ---------- */
+    function loadAll() {
+      return Promise.all([
+        rest('GET', 'site_settings?select=key,value'),
+        rest('GET', 'menu_categories?select=*&order=position'),
+        rest('GET', 'menu_items?select=*&order=position'),
+        rest('GET', 'opening_hours?select=*'),
+        rest('GET', 'gallery_photos?select=*&order=position')
+      ]).then(function (r) {
+        S.settings = {};
+        r[0].forEach(function (x) { S.settings[x.key] = x.value; });
+        S.cats = r[1];
+        S.items = r[2];
+        S.hours = {};
+        for (var d = 0; d < 7; d++) S.hours[d] = { closed: d === 1, opens: '12:00', closes: '05:00' };
+        r[3].forEach(function (x) {
+          S.hours[x.day] = { closed: x.closed, opens: String(x.opens).slice(0, 5), closes: String(x.closes).slice(0, 5) };
+        });
+        S.photos = r[4];
+        renderTextes();
+        renderCarte();
+        renderHoraires();
+        renderPhotos();
+      });
+    }
+
+    function showApp() {
+      $('#login').hidden = true;
+      $('#app').hidden = false;
+      return loadAll().catch(function (e) { toast(msgErreur(e), true); });
+    }
+
+    function showLogin() {
+      session = null;
+      localStorage.removeItem('escale_admin');
+      $('#app').hidden = true;
+      $('#login').hidden = false;
+    }
+
+    $('#loginForm').addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var err = $('#loginErreur');
+      var b = $('#loginBtn');
+      err.textContent = '';
+      b.disabled = true;
+      auth('password', { email: $('#email').value.trim(), password: $('#mdp').value }).then(function (j) {
+        saveSession(j);
+        $('#mdp').value = '';
+        return showApp();
+      }).catch(function (e) {
+        var m = String(e.message);
+        err.textContent = /invalid login credentials/i.test(m) ? 'Email ou mot de passe incorrect.' : msgErreur(e);
+      }).then(function () { b.disabled = false; });
+    });
+
+    $('#logout').addEventListener('click', showLogin);
+
+    if (!BASE || !KEY || /VOTRE/.test(BASE + KEY)) {
+      $('#loginErreur').textContent = 'Le fichier config.js n’est pas encore renseigné.';
+      $('#loginBtn').disabled = true;
+    } else {
+      try { session = JSON.parse(localStorage.getItem('escale_admin')); } catch (e) { session = null; }
+      if (session && session.refresh_token) {
+        token().then(showApp).catch(showLogin);
+      }
+    }
+  })();
+  </script>
+</body>
+</html>

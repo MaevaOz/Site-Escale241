@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>document.documentElement.classList.add('js');</script>
+
+  <title>L'Escale 241 — Restaurant, Bar et Ambiance à Poitiers</title>
+  <meta name="description" content="Restaurant-bar de nuit à Poitiers. Folong, bouillon de tripes et crabes, poisson au four, bières, vins et soirées avec DJ. Ouvert du mardi au dimanche, de 12h à 05h." />
+  <meta name="theme-color" content="#141413" />
+  <link rel="canonical" href="https://lescale241.vercel.app/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:site_name" content="L'Escale 241" />
+  <meta property="og:title" content="L'Escale 241 — Restaurant, Bar et Ambiance à Poitiers" />
+  <meta property="og:description" content="Spécialités africaines, bières et soirées avec DJ à Poitiers. Ouvert de midi à 05h du matin." />
+  <meta property="og:image" content="https://lescale241.vercel.app/image_28.png" />
+  <meta property="og:url" content="https://lescale241.vercel.app/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" type="image/png" href="image_24.png" />
+  <link rel="apple-touch-icon" href="image_24.png" />
+  <link rel="preload" as="image" href="image_28.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["Restaurant", "BarOrPub"],
+    "name": "L'Escale 241",
+    "url": "https://lescale241.vercel.app/",
+    "image": "https://lescale241.vercel.app/image_28.png",
+    "telephone": "+33755232245",
+    "servesCuisine": "Africaine",
+    "priceRange": "€",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "44 Rue de la Provence",
+      "postalCode": "86000",
+      "addressLocality": "Poitiers",
+      "addressCountry": "FR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 46.5684785,
+      "longitude": 0.3621437
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "12:00",
+        "closes": "05:00"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* CHARTE DESIGN (UI/UX Pro Max) */
+    :root {
+      --fond: #141413;
+      --surface: #1e1e1c;
+      --surface-elevated: #282825;
+      --ocre: #d4821a;
+      --ocre-hover: #b86e14;
+      --ocre-claire: rgba(212, 130, 26, 0.1);
+      --encre: #0e0e0d;
+      --trait: rgba(255, 255, 255, 0.1);
+      --trait-fort: rgba(255, 255, 255, 0.25);
+      --texte: #f5f6f4;
+      --texte-secondaire: #a6a6a1;
+
+      --font-titre: 'Source Serif 4', Georgia, serif;
+      --font-texte: 'Source Sans 3', system-ui, sans-serif;
+
+      --espace-1: 4px;
+      --espace-2: 8px;
+      --espace-3: 12px;
+      --espace-4: 16px;
+      --espace-6: 24px;
+      --espace-8: 32px;
+      --espace-12: 48px;
+
+      --arrondi-bouton: 8px;
+      --arrondi-panneau: 16px;
+      --vitesse: 0.3s;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body {
+      font-family: var(--font-texte);
+      background: var(--fond);
+      color: var(--texte);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    img { display: block; max-width: 100%; height: auto; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+    [hidden] { display: none !important; }
+    .chasse-fixe { font-variant-numeric: tabular-nums; }
+
+    :focus-visible {
+      outline: 2px solid var(--ocre);
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: var(--espace-4);
+      top: -80px;
+      z-index: 2000;
+      background: var(--ocre);
+      color: var(--encre);
+      font-weight: 700;
+      padding: var(--espace-3) var(--espace-6);
+      border-radius: var(--arrondi-bouton);
+    }
+    .skip-link:focus { top: var(--espace-4); }
+
+    .icone {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* NAVIGATION */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background var(--vitesse) ease, padding var(--vitesse) ease, box-shadow var(--vitesse) ease;
+      background: transparent;
+    }
+
+    #navbar.scrolled {
+      background: rgba(20, 20, 19, 0.95);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+      padding: 12px 40px;
+      border-bottom: 1px solid var(--trait);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--trait);
+      background-color: var(--surface);
+    }
+
+    .nav-title {
+      font-family: var(--font-titre);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--espace-8);
+      align-items: center;
+    }
+
+    .nav-links a:not(.nav-cta) {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--texte-secondaire);
+      transition: color var(--vitesse), border-color var(--vitesse);
+      padding: var(--espace-2) 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:not(.nav-cta):hover,
+    .nav-links a:not(.nav-cta).active {
+      color: var(--ocre);
+      border-color: var(--ocre);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      background: var(--ocre);
+      color: var(--encre);
+      padding: 10px 22px;
+      border-radius: var(--arrondi-bouton);
+      font-weight: 700;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      transition: background var(--vitesse), transform var(--vitesse);
+    }
+
+    .nav-cta:hover {
+      background: var(--ocre-hover);
+      transform: translateY(-1px);
+    }
+
+    .nav-burger {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 1010;
+    }
+
+    .nav-burger span {
+      display: block;
+      width: 24px;
+      height: 2.5px;
+      background: var(--texte);
+      border-radius: 2px;
+      transition: transform var(--vitesse), opacity var(--vitesse);
+    }
+
+    .nav-burger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--fond);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--espace-6);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .mobile-menu.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-menu a:not(.nav-cta) {
+      font-family: var(--font-titre);
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--texte-secondaire);
+      padding: var(--espace-2) var(--espace-4);
+    }
+
+    .mobile-menu a:not(.nav-cta):hover { color: var(--ocre); }
+
+    /* SECTION HERO */
+    #hero {
+      min-height: 100vh;
+      min-height: 100dvh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('image_28.png') center/cover no-repeat;
+      filter: brightness(0.35);
+      transform: scale(1.02);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 0 24px;
+      max-width: 800px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--ocre-claire);
+      color: var(--ocre);
+      border: 1px solid var(--ocre);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: var(--espace-6);
+    }
+
+    .hero-title {
+      font-family: var(--font-titre);
+      font-size: clamp(48px, 8vw, 84px);
+      font-weight: 700;
+      color: var(--texte);
+      line-height: 1.05;
+      margin-bottom: var(--espace-4);
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--texte-secondaire);
+      margin-bottom: var(--espace-8);
+      max-width: 640px;
+      margin-inline: auto;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: var(--espace-4);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 14px 36px;
+      border-radius: var(--arrondi-bouton);
+      font-size: 15px;
+      cursor: pointer;
+      transition: background var(--vitesse), border-color var(--vitesse), transform var(--vitesse);
+    }
+
+    .btn-primary {
+      background: var(--ocre);
+      color: var(--encre);
+      font-weight: 700;
+      border: none;
+    }
+
+    .btn-primary:hover { background: var(--ocre-hover); transform: translateY(-1px); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--texte);
+      font-weight: 600;
+      border: 2px solid var(--trait-fort);
+    }
+
+    .btn-secondary:hover { border-color: var(--ocre); }
+
+    /* SECTIONS */
+    section { padding: 100px 24px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .section-tag {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--ocre);
+      margin-bottom: var(--espace-3);
+    }
+
+    .section-title {
+      font-family: var(--font-titre);
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 600;
+      color: var(--texte);
+      margin-bottom: var(--espace-6);
+    }
+
+    /* SECTION MENU (LA CARTE) */
+    #menu { background: var(--encre); }
+
+    .menu-tabs {
+      display: flex;
+      gap: var(--espace-2);
+      margin-bottom: var(--espace-8);
+      border-bottom: 1px solid var(--trait);
+      padding-bottom: var(--espace-3);
+      flex-wrap: wrap;
+    }
+
+    .menu-tab {
+      min-height: 44px;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--texte-secondaire);
+      transition: background var(--vitesse), border-color var(--vitesse), color var(--vitesse);
+    }
+
+    .menu-tab:hover { color: var(--texte); }
+
+    .menu-tab.active {
+      background: var(--ocre-claire);
+      border-color: var(--ocre);
+      color: var(--ocre);
+    }
+
+    .menu-category { display: none; }
+    .menu-category.active { display: block; }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+      gap: var(--espace-4);
+    }
+
+    .menu-item {
+      background: var(--surface);
+      border: 1px solid var(--trait);
+      border-radius: var(--arrondi-panneau);
+      padding: var(--espace-4);
+      display: flex;
+      gap: var(--espace-4);
+      align-items: flex-start;
+      transition: transform var(--vitesse) ease, border-color var(--vitesse), background var(--vitesse);
+    }
+
+    .menu-item:hover {
+      border-color: var(--trait-fort);
+      transform: translateY(-2px);
+      background: var(--surface-elevated);
+    }
+
+    .menu-item-img {
+      width: 90px;
+      height: 90px;
+      border-radius: 12px;
+      flex-shrink: 0;
+      background: var(--fond);
+    }
+
+    .menu-item-info { flex: 1; }
+
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--espace-2);
+      margin-bottom: var(--espace-1);
+    }
+
+    .menu-item-name {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--texte);
+    }
+
+    .menu-item-price {
+      font-family: var(--font-titre);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ocre);
+      white-space: nowrap;
+    }
+
+    .menu-item-desc {
+      font-size: 14px;
+      color: var(--texte-secondaire);
+      line-height: 1.4;
+    }
+
+    .formula-banner {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, var(--surface) 0%, var(--encre) 100%);
+      border: 1px dashed var(--ocre);
+      border-radius: var(--arrondi-panneau);
+      padding: var(--espace-6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--espace-4);
+      margin-bottom: var(--espace-6);
+      flex-wrap: wrap;
+    }
+
+    .formula-content h3 {
+      font-family: var(--font-titre);
+      font-size: 24px;
+      color: var(--ocre);
+      margin-bottom: var(--espace-1);
+    }
+
+    .formula-content p { color: var(--texte); }
+
+    .formula-badge {
+      background: var(--ocre);
+      color: var(--encre);
+      font-size: 28px;
+      font-family: var(--font-titre);
+      font-weight: 700;
+      padding: 8px 24px;
+      border-radius: var(--arrondi-bouton);
+    }
+
+    .legal-note {
+      margin-top: var(--espace-6);
+      font-size: 13px;
+      color: var(--texte-secondaire);
+    }
+
+    /* SECTION EVENEMENTS */
+    #evenements { background: var(--surface); }
+
+    .events-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--espace-12);
+      align-items: center;
+    }
+
+    .event-features { margin-top: var(--espace-8); }
+    .event-feature {
+      display: flex;
+      gap: var(--espace-3);
+      align-items: flex-start;
+      margin-bottom: var(--espace-4);
+    }
+
+    .event-feature-icon {
+      color: var(--ocre);
+      margin-top: 3px;
+    }
+
+    .event-feature-text strong {
+      display: block;
+      color: var(--texte);
+      font-size: 16px;
+    }
+
+    .event-feature-text span { color: var(--texte-secondaire); }
+
+    .events-media {
+      position: relative;
+      border-radius: var(--arrondi-panneau);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      border: 1px solid var(--trait);
+      background: var(--surface-elevated);
+    }
+
+    .events-media img { width: 100%; height: 100%; }
+
+    .events-media-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: var(--espace-6);
+    }
+
+    .events-media-tag {
+      background: var(--ocre);
+      color: var(--encre);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: var(--espace-2);
+    }
+
+    .events-media-title {
+      font-family: var(--font-titre);
+      font-size: clamp(18px, 3vw, 24px);
+      font-weight: 600;
+      color: #fff;
+    }
+
+    /* GALERIE */
+    #galerie { background: var(--fond); }
+
+    .galerie-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+      gap: var(--espace-3);
+      margin-top: var(--espace-8);
+    }
+
+    .galerie-item {
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      border: 1px solid var(--trait);
+      background: var(--surface-elevated);
+    }
+
+    .galerie-item img { width: 100%; height: 100%; }
+
+    /* INFOS PRATIQUES */
+    #infos { background: var(--encre); }
+
+    .infos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--espace-12);
+      align-items: start;
+    }
+
+    .hours-status {
+      display: flex;
+      align-items: center;
+      gap: var(--espace-2);
+      font-weight: 600;
+      margin-bottom: var(--espace-4);
+    }
+
+    .hours-status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--texte-secondaire);
+      flex-shrink: 0;
+    }
+
+    .hours-status.is-open .hours-status-dot { background: var(--ocre); }
+    .hours-status.is-open { color: var(--ocre); }
+
+    .hours-card {
+      background: var(--surface);
+      border: 1px solid var(--trait);
+      border-radius: var(--arrondi-panneau);
+      margin-bottom: var(--espace-6);
+      overflow: hidden;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--trait);
+    }
+    .hours-row:last-child { border-bottom: none; }
+
+    .hours-closed { color: var(--texte-secondaire); }
+
+    .hours-today { background: var(--ocre-claire); }
+    .hours-today-badge {
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--ocre);
+      color: var(--encre);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: var(--espace-2);
+    }
+
+    .map-card {
+      border-radius: var(--arrondi-panneau);
+      overflow: hidden;
+      height: 340px;
+      border: 1px solid var(--trait);
+      background: var(--surface);
+    }
+
+    .map-card iframe { width: 100%; height: 100%; border: 0; }
+
+    .map-placeholder {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--espace-4);
+      padding: var(--espace-6);
+      text-align: center;
+    }
+
+    .map-placeholder p {
+      font-size: 14px;
+      color: var(--texte-secondaire);
+      max-width: 320px;
+    }
+
+    .map-actions {
+      display: flex;
+      gap: var(--espace-3);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .map-actions .btn-primary,
+    .map-actions .btn-secondary { padding: 10px 22px; }
+
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--trait);
+      border-radius: 12px;
+      padding: var(--espace-4);
+      display: flex;
+      gap: var(--espace-3);
+      align-items: center;
+      margin-top: var(--espace-4);
+      transition: border-color var(--vitesse);
+    }
+
+    a.contact-card:hover { border-color: var(--trait-fort); }
+
+    .contact-card-icon {
+      color: var(--ocre);
+      background: var(--ocre-claire);
+      padding: var(--espace-2);
+      border-radius: 8px;
+      display: flex;
+    }
+
+    .contact-card-text strong { display: block; }
+    .contact-card-text span { font-size: 14px; color: var(--texte-secondaire); }
+
+    /* FOOTER */
+    footer {
+      background: var(--encre);
+      padding: 80px 24px 40px;
+      border-top: 1px solid var(--trait);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr repeat(2, 1fr);
+      gap: var(--espace-8);
+      max-width: 1100px;
+      margin: 0 auto var(--espace-8);
+    }
+
+    .footer-brand-name {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 16px;
+      font-family: var(--font-titre);
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .footer-brand-name img { width: 36px; height: 36px; border-radius: 50%; }
+
+    .footer-brand p {
+      font-size: 14px;
+      color: var(--texte-secondaire);
+      line-height: 1.6;
+      max-width: 320px;
+    }
+
+    .footer-col h3 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: var(--espace-3);
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 14px;
+      color: var(--texte-secondaire);
+      padding: var(--espace-2) 0;
+      transition: color var(--vitesse);
+    }
+
+    .footer-col a:hover { color: var(--ocre); }
+
+    .footer-legal {
+      max-width: 1100px;
+      margin: 0 auto var(--espace-6);
+      font-size: 14px;
+      color: var(--texte-secondaire);
+    }
+
+    .footer-legal summary {
+      cursor: pointer;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    .footer-legal-body { padding: var(--espace-2) 0 var(--espace-4); }
+    .footer-legal-body p { margin-bottom: var(--espace-2); max-width: 720px; }
+
+    .footer-alcool {
+      max-width: 1100px;
+      margin: 0 auto var(--espace-4);
+      font-size: 13px;
+      color: var(--texte-secondaire);
+    }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-top: var(--espace-4);
+      border-top: 1px solid var(--trait);
+      display: flex;
+      justify-content: space-between;
+      gap: var(--espace-4);
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: var(--texte-secondaire);
+    }
+
+    .agency-link { color: var(--ocre); font-weight: 600; text-decoration: underline; }
+
+    /* ANIMATIONS */
+    .js .fade-up {
+      opacity: 0;
+      translate: 0 24px;
+      transition: opacity 0.5s ease, translate 0.5s ease;
+    }
+    .js .fade-up.visible { opacity: 1; translate: 0 0; }
+
+    .js .menu-item.fade-up {
+      transition: opacity 0.5s ease, translate 0.5s ease, transform var(--vitesse) ease, border-color var(--vitesse), background var(--vitesse);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+      }
+      .js .fade-up { opacity: 1; translate: 0 0; }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      #navbar { padding: 12px 20px; }
+      #navbar.scrolled { padding: 8px 20px; }
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .nav-title { font-size: 20px; }
+      section { padding: 60px 20px; }
+      .events-layout, .infos-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <!-- EN-TETE ET NAVIGATION -->
+  <header>
+    <nav id="navbar" aria-label="Navigation principale">
+      <div class="nav-brand">
+        <img src="image_24.png" alt="" width="44" height="44" class="nav-logo-img" onerror="this.remove()" />
+        <span class="nav-title">L'Escale 241</span>
+      </div>
+      <div class="nav-links">
+        <a href="#menu">La carte</a>
+        <a href="#evenements">Événements</a>
+        <a href="#galerie">L'ambiance</a>
+        <a href="#infos">Infos pratiques</a>
+        <a class="nav-cta" href="tel:+33755232245" data-tel><span data-s="phone">07 55 23 22 45</span></a>
+      </div>
+      <button class="nav-burger" id="burgerBtn" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- MENU MOBILE -->
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Menu mobile" inert>
+    <a href="#menu">La carte</a>
+    <a href="#evenements">Événements</a>
+    <a href="#galerie">L'ambiance</a>
+    <a href="#infos">Infos pratiques</a>
+    <a class="nav-cta" href="tel:+33755232245" data-tel style="font-size: 20px; padding: 16px 36px; margin-top: 16px;">Appeler</a>
+  </nav>
+
+  <main id="contenu">
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-bg" role="img" aria-label="Salle de L'Escale 241"></div>
+      <div class="hero-content">
+        <p class="hero-tag" data-s="hero_tag">Restaurant · Bar · Ambiance de nuit</p>
+        <h1 class="hero-title" data-s="hero_title">L'Escale 241</h1>
+        <p class="hero-sub" data-s="hero_sub">Folong, bouillon de tripes et crabes, poisson au four, et des soirées avec DJ. Ouvert à Poitiers de midi à 05h du matin.</p>
+        <div class="hero-btns">
+          <a href="tel:+33755232245" class="btn-primary" data-tel>Appeler le  <span data-s="phone">07 55 23 22 45</span></a>
+          <a href="#menu" class="btn-secondary">Voir la carte</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- LA CARTE -->
+    <section id="menu">
+      <div class="container">
+        <div class="fade-up">
+          <p class="section-tag">La carte</p>
+          <h2 class="section-title" data-s="menu_title">Nos spécialités et boissons</h2>
+        </div>
+
+        <div class="menu-tabs fade-up" id="menuTabs" role="tablist" aria-label="Catégories de la carte">
+          <button class="menu-tab active" type="button" role="tab" id="tab-plats" aria-selected="true" aria-controls="plats">Les plats</button>
+          <button class="menu-tab" type="button" role="tab" id="tab-accompagnements" aria-selected="false" aria-controls="accompagnements" tabindex="-1">Accompagnements</button>
+          <button class="menu-tab" type="button" role="tab" id="tab-boissons" aria-selected="false" aria-controls="boissons" tabindex="-1">Boissons et vins</button>
+        </div>
+
+        <div id="menuPanels">
+        <!-- PLATS -->
+        <div class="menu-category active" id="plats" role="tabpanel" aria-labelledby="tab-plats">
+          <div class="menu-grid">
+
+            <div class="menu-item fade-up">
+              <img class="menu-item-img" src="image_26.png" alt="Folong aux crevettes et poisson fumé" width="90" height="90" loading="lazy" decoding="async" onerror="this.remove()" />
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Folong aux crevettes et poisson fumé</div>
+                  <div class="menu-item-price chasse-fixe">15&nbsp;€</div>
+                </div>
+                <p class="menu-item-desc">Feuilles de folong mijotées, crevettes, morceaux de poisson fumé.</p>
+              </div>
+            </div>
+
+            <div class="menu-item fade-up">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Bouillon tripes et crabes</div>
+                  <div class="menu-item-price chasse-fixe">15&nbsp;€</div>
+                </div>
+                <p class="menu-item-desc">Un bouillon piquant à base de tripes et de crabes.</p>
+              </div>
+            </div>
+
+            <div class="menu-item fade-up">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Poisson au four</div>
+                  <div class="menu-item-price chasse-fixe">15&nbsp;€</div>
+                </div>
+                <p class="menu-item-desc">Poisson entier préparé et cuit au four.</p>
+              </div>
+            </div>
+
+            <div class="menu-item fade-up">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Mouton (simple)</div>
+                  <div class="menu-item-price chasse-fixe">15&nbsp;€</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item fade-up">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Ailes de poulet (simple)</div>
+                  <div class="menu-item-price chasse-fixe">10&nbsp;€</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ACCOMPAGNEMENTS -->
+        <div class="menu-category" id="accompagnements" role="tabpanel" aria-labelledby="tab-accompagnements">
+          <div class="menu-grid">
+
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Boule d'attiéké</div>
+                  <div class="menu-item-price chasse-fixe">5&nbsp;€</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Banane plantain</div>
+                  <div class="menu-item-price chasse-fixe">2,50&nbsp;€</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Manioc</div>
+                  <div class="menu-item-price chasse-fixe">1,50&nbsp;€</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- BOISSONS ET FORMULE -->
+        <div class="menu-category" id="boissons" role="tabpanel" aria-labelledby="tab-boissons">
+
+          <div class="formula-banner">
+            <div class="formula-content">
+              <h3>La formule</h3>
+              <p>4 boissons au choix, bières en bouteille ou jus, mélange libre.</p>
+            </div>
+            <div class="formula-badge chasse-fixe">10&nbsp;€</div>
+          </div>
+
+          <div class="menu-grid">
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Bières en bouteille</div>
+                  <div class="menu-item-price chasse-fixe">3&nbsp;€</div>
+                </div>
+                <p class="menu-item-desc">Leffe, Desperados, Heineken, Guinness.</p>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Jus et softs</div>
+                  <div class="menu-item-price chasse-fixe">2&nbsp;€</div>
+                </div>
+                <p class="menu-item-desc">Coca-Cola, Fanta, Orangina, Red Bull, Sprite, Caraïbos litchi.</p>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Eau</div>
+                  <div class="menu-item-price chasse-fixe">1&nbsp;€</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Régab</div>
+                  <div class="menu-item-price chasse-fixe">6&nbsp;€</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Booster</div>
+                  <div class="menu-item-price chasse-fixe">8&nbsp;€</div>
+                </div>
+                <p class="menu-item-desc">Whisky cola, Zombie, Banana mana.</p>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Beaufort</div>
+                  <div class="menu-item-price chasse-fixe">4&nbsp;€</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Alcools Flash</div>
+                  <div class="menu-item-price chasse-fixe">15&nbsp;€</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Petit vin</div>
+                  <div class="menu-item-price chasse-fixe">5&nbsp;€</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Muscador</div>
+                  <div class="menu-item-price chasse-fixe">10&nbsp;€</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Grands vins (rosé et blanc)</div>
+                  <div class="menu-item-price chasse-fixe">20&nbsp;€</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Chardonnay</div>
+                  <div class="menu-item-price chasse-fixe">20&nbsp;€</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Clairette de Die</div>
+                  <div class="menu-item-price chasse-fixe">25&nbsp;€</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Baileys</div>
+                  <div class="menu-item-price chasse-fixe">30&nbsp;€</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Ballantine</div>
+                  <div class="menu-item-price chasse-fixe">60&nbsp;€</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Champagne Nicolas Feuillatte</div>
+                  <div class="menu-item-price chasse-fixe">60&nbsp;€</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Vodka</div>
+                  <div class="menu-item-price chasse-fixe">70&nbsp;€</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Chivas 18 ans</div>
+                  <div class="menu-item-price chasse-fixe">90&nbsp;€</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-header">
+                  <div class="menu-item-name">Champagne Veuve Clicquot</div>
+                  <div class="menu-item-price chasse-fixe">100&nbsp;€</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="legal-note">L'abus d'alcool est dangereux pour la santé, à consommer avec modération. La vente d'alcool aux mineurs de moins de 18 ans est interdite.</p>
+        </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EVENEMENTS -->
+    <section id="evenements">
+      <div class="container">
+        <div class="events-layout">
+          <div class="events-content fade-up">
+            <p class="section-tag">Les événements</p>
+            <h2 class="section-title" data-s="events_title">La scène et les soirées</h2>
+            <p data-s="events_text">L'Escale 241 change d'ambiance à la tombée de la nuit. Le week-end et lors des grandes occasions, la salle accueille des soirées avec DJ et des artistes invités.</p>
+
+            <div class="event-features">
+              <div class="event-feature">
+                <svg class="icone event-feature-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                <div class="event-feature-text">
+                  <strong data-s="event1_title">DJ Mozes aux platines</strong>
+                  <span data-s="event1_text">Tous les week-ends, du son afro, hip-hop et généraliste.</span>
+                </div>
+              </div>
+              <div class="event-feature">
+                <svg class="icone event-feature-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                <div class="event-feature-text">
+                  <strong data-s="event2_title">Fêtes et artistes invités</strong>
+                  <span data-s="event2_text">Noël, Saint-Sylvestre, showcases. La programmation évolue au fil de l'année.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="events-media fade-up">
+            <img id="eventsImg" src="evenement.jpg" alt="Soirée à L'Escale 241" width="800" height="600" loading="lazy" decoding="async" onerror="this.hidden=true" />
+            <div class="events-media-overlay">
+              <span class="events-media-tag" data-s="events_badge">À venir</span>
+              <div class="events-media-title" data-s="events_overlay_title">Programmation bientôt disponible</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERIE -->
+    <section id="galerie">
+      <div class="container fade-up">
+        <p class="section-tag">La galerie</p>
+        <h2 class="section-title" data-s="galerie_title">L'ambiance en images</h2>
+      </div>
+      <div class="galerie-grid container" id="galerieGrid">
+        <div class="galerie-item fade-up"><img src="galerie-1.jpg" alt="Ambiance à L'Escale 241" width="800" height="600" loading="lazy" decoding="async" onerror="this.closest('.galerie-item').remove()" /></div>
+        <div class="galerie-item fade-up"><img src="image_26.png" alt="Folong aux crevettes et poisson fumé" width="800" height="600" loading="lazy" decoding="async" onerror="this.closest('.galerie-item').remove()" /></div>
+        <div class="galerie-item fade-up"><img src="galerie-2.jpg" alt="Plat servi à L'Escale 241" width="800" height="600" loading="lazy" decoding="async" onerror="this.closest('.galerie-item').remove()" /></div>
+      </div>
+    </section>
+
+    <!-- INFOS PRATIQUES -->
+    <section id="infos">
+      <div class="container">
+        <div class="fade-up">
+          <p class="section-tag">Venir à L'Escale</p>
+          <h2 class="section-title" data-s="infos_title">Horaires et accès</h2>
+        </div>
+
+        <div class="infos-grid fade-up">
+          <div>
+            <p class="hours-status" id="hoursStatus" role="status"><span class="hours-status-dot" aria-hidden="true"></span><span id="hoursStatusText">Du mardi au dimanche, de 12h00 à 05h00</span></p>
+
+            <div class="hours-card" id="hoursCard">
+              <div class="hours-row"><span class="hours-day">Lundi</span><span class="hours-time hours-closed">Fermé</span></div>
+              <div class="hours-row"><span class="hours-day">Mardi</span><span class="hours-time">12h00 — 05h00</span></div>
+              <div class="hours-row"><span class="hours-day">Mercredi</span><span class="hours-time">12h00 — 05h00</span></div>
+              <div class="hours-row"><span class="hours-day">Jeudi</span><span class="hours-time">12h00 — 05h00</span></div>
+              <div class="hours-row"><span class="hours-day">Vendredi</span><span class="hours-time">12h00 — 05h00</span></div>
+              <div class="hours-row"><span class="hours-day">Samedi</span><span class="hours-time">12h00 — 05h00</span></div>
+              <div class="hours-row"><span class="hours-day">Dimanche</span><span class="hours-time">12h00 — 05h00</span></div>
+            </div>
+
+            <a class="contact-card" href="tel:+33755232245" data-tel>
+              <span class="contact-card-icon">
+                <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </span>
+              <span class="contact-card-text">
+                <strong data-s="phone">07 55 23 22 45</strong>
+                <span>Appel direct</span>
+              </span>
+            </a>
+            <a class="contact-card" data-maps href="https://www.google.com/maps/search/?api=1&amp;query=44+Rue+de+la+Provence+86000+Poitiers" target="_blank" rel="noopener noreferrer">
+              <span class="contact-card-icon">
+                <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              </span>
+              <span class="contact-card-text">
+                <strong data-s="address_line1">44 Rue de la Provence</strong>
+                <span data-s="address_line2">86000 Poitiers</span>
+              </span>
+            </a>
+          </div>
+
+          <div>
+            <div class="map-card" id="mapCard" data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2732.1856338561706!2d0.36214371195610255!3d46.56847847098492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47fce538efb53297%3A0xe13fa6754020a10!2s44%20Rue%20de%20la%20Provence%2C%2086000%20Poitiers!5e0!3m2!1sfr!2sfr!4v1715014382740!5m2!1sfr!2sfr">
+              <div class="map-placeholder">
+                <p>La carte est fournie par Google Maps. Son affichage transmet votre adresse IP à Google.</p>
+                <div class="map-actions">
+                  <button class="btn-primary" type="button" id="mapLoad">Afficher la carte</button>
+                  <a class="btn-secondary" data-maps href="https://www.google.com/maps/search/?api=1&amp;query=44+Rue+de+la+Provence+86000+Poitiers" target="_blank" rel="noopener noreferrer">Ouvrir dans Maps</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PIED DE PAGE -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-name">
+          <img src="image_24.png" alt="" width="36" height="36" loading="lazy" onerror="this.remove()" />
+          <span>L'Escale 241</span>
+        </div>
+        <p data-s="footer_text">Restaurant-bar de nuit à Poitiers. Spécialités africaines, bières et soirées avec DJ, du mardi au dimanche.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Navigation</h3>
+        <a href="#menu">La carte</a>
+        <a href="#evenements">Événements</a>
+        <a href="#galerie">L'ambiance</a>
+        <a href="#infos">Infos pratiques</a>
+      </div>
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <a href="tel:+33755232245" data-tel><span data-s="phone">07 55 23 22 45</span></a>
+        <a href="#infos"><span data-s="address_line1">44 Rue de la Provence</span>, <span data-s="address_line2">86000 Poitiers</span></a>
+      </div>
+    </div>
+
+    <details class="footer-legal" id="mentions">
+      <summary>Mentions légales</summary>
+      <div class="footer-legal-body">
+        <p><strong>Éditeur du site.</strong> L'Escale 241, <span data-s="address_line1">44 Rue de la Provence</span>, <span data-s="address_line2">86000 Poitiers</span>. Téléphone : <span data-s="phone">07 55 23 22 45</span>.</p>
+        <p><strong>Responsable de la publication.</strong> <span data-s="legal_publisher">[nom à compléter]</span>. <strong>SIRET.</strong> <span data-s="legal_siret">[numéro à compléter]</span>.</p>
+        <p><strong>Conception.</strong> MaEkia Studio.</p>
+        <p><strong>Hébergement.</strong> Vercel Inc., vercel.com.</p>
+        <p><strong>Données personnelles.</strong> Ce site ne contient ni formulaire, ni outil de mesure d'audience. Les polices de caractères sont servies par Google Fonts. La carte Google Maps n'est chargée qu'après votre clic sur « Afficher la carte ».</p>
+      </div>
+    </details>
+
+    <p class="footer-alcool">L'abus d'alcool est dangereux pour la santé, à consommer avec modération.</p>
+
+    <div class="footer-bottom">
+      <span>© 2026 L'Escale 241. Tous droits réservés.</span>
+      <span>Site réalisé par <a href="https://maekiastudio.onrender.com" target="_blank" rel="noopener noreferrer" class="agency-link">MaEkia Studio</a>.</span>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script>
+    (function () {
+      var $ = function (s, r) { return (r || document).querySelector(s); };
+      var qa = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+      function el(tag, cls, text) {
+        var e = document.createElement(tag);
+        if (cls) e.className = cls;
+        if (text !== undefined) e.textContent = text;
+        return e;
+      }
+
+      var navbar = document.getElementById('navbar');
+      var burger = document.getElementById('burgerBtn');
+      var mobileMenu = document.getElementById('mobileMenu');
+
+      /* Barre de navigation au défilement */
+      function onScroll() { navbar.classList.toggle('scrolled', window.scrollY > 40); }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      /* Menu mobile */
+      function setMenu(open) {
+        burger.classList.toggle('open', open);
+        mobileMenu.classList.toggle('open', open);
+        burger.setAttribute('aria-expanded', String(open));
+        burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+        mobileMenu.inert = !open;
+        document.body.style.overflow = open ? 'hidden' : '';
+      }
+      setMenu(false);
+      burger.addEventListener('click', function () {
+        setMenu(!mobileMenu.classList.contains('open'));
+      });
+      mobileMenu.addEventListener('click', function (e) {
+        if (e.target.closest('a')) setMenu(false);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+          setMenu(false);
+          burger.focus();
+        }
+      });
+      if (window.matchMedia) {
+        window.matchMedia('(min-width: 901px)').addEventListener('change', function (e) {
+          if (e.matches) setMenu(false);
+        });
+      }
+
+      /* Apparition au défilement */
+      var reveal = null;
+      if ('IntersectionObserver' in window) {
+        reveal = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('visible');
+              reveal.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.1 });
+      }
+      function observeReveals(root) {
+        qa('.fade-up:not(.visible)', root).forEach(function (n) {
+          if (reveal) reveal.observe(n); else n.classList.add('visible');
+        });
+      }
+      observeReveals();
+
+      /* Lien actif dans la navigation */
+      if ('IntersectionObserver' in window) {
+        var links = qa('.nav-links a[href^="#"]');
+        var spy = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (!e.isIntersecting) return;
+            links.forEach(function (l) {
+              var on = l.getAttribute('href') === '#' + e.target.id;
+              l.classList.toggle('active', on);
+              if (on) l.setAttribute('aria-current', 'true');
+              else l.removeAttribute('aria-current');
+            });
+          });
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        ['hero', 'menu', 'evenements', 'galerie', 'infos'].forEach(function (id) {
+          var s = document.getElementById(id);
+          if (s) spy.observe(s);
+        });
+      }
+
+      /* Onglets de la carte (liste relue à chaque action : les onglets peuvent changer) */
+      var tabsEl = $('#menuTabs');
+      function tabList() { return qa('.menu-tab', tabsEl); }
+      function selectTab(tab, focus) {
+        tabList().forEach(function (t) {
+          var on = t === tab;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', String(on));
+          t.tabIndex = on ? 0 : -1;
+          var p = document.getElementById(t.getAttribute('aria-controls'));
+          if (p) p.classList.toggle('active', on);
+        });
+        if (focus) tab.focus();
+      }
+      tabsEl.addEventListener('click', function (e) {
+        var t = e.target.closest('.menu-tab');
+        if (t) selectTab(t, false);
+      });
+      tabsEl.addEventListener('keydown', function (e) {
+        var t = e.target.closest('.menu-tab');
+        if (!t) return;
+        var list = tabList();
+        var i = list.indexOf(t);
+        var next = null;
+        if (e.key === 'ArrowRight') next = list[(i + 1) % list.length];
+        else if (e.key === 'ArrowLeft') next = list[(i - 1 + list.length) % list.length];
+        else if (e.key === 'Home') next = list[0];
+        else if (e.key === 'End') next = list[list.length - 1];
+        if (next) { e.preventDefault(); selectTab(next, true); }
+      });
+
+      /* Horaires : heure de Paris, service de nuit possible (fermeture après minuit) */
+      var JOURS = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+      var ORDRE = [1, 2, 3, 4, 5, 6, 0];
+      var H = {};
+      for (var d = 0; d < 7; d++) H[d] = { closed: d === 1, opens: '12:00', closes: '05:00' };
+
+      function toMin(t) { var p = String(t).split(':'); return parseInt(p[0], 10) * 60 + parseInt(p[1], 10); }
+      function fmt(t) { var p = String(t).split(':'); return p[0] + 'h' + p[1]; }
+      function overnight(h) { return toMin(h.closes) <= toMin(h.opens); }
+
+      function parisNow() {
+        var parts = new Intl.DateTimeFormat('en-US', {
+          timeZone: 'Europe/Paris', weekday: 'short', hour: 'numeric', minute: 'numeric', hourCycle: 'h23'
+        }).formatToParts(new Date());
+        function get(type) {
+          return parts.filter(function (p) { return p.type === type; })[0].value;
+        }
+        return {
+          jour: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(get('weekday')),
+          min: parseInt(get('hour'), 10) * 60 + parseInt(get('minute'), 10)
+        };
+      }
+
+      function computeStatus(now) {
+        var jour = now.jour, m = now.min, veille = (jour + 6) % 7;
+        var t = H[jour], y = H[veille];
+        var open = false, until = '', service = jour;
+
+        if (!t.closed && m >= toMin(t.opens)) {
+          if (overnight(t)) { open = true; until = t.closes; }
+          else if (m < toMin(t.closes)) { open = true; until = t.closes; }
+        }
+        if (!open && !y.closed && overnight(y) && m < toMin(y.closes)) {
+          open = true; until = y.closes; service = veille;
+        }
+
+        var msg = '';
+        if (open) {
+          msg = 'Ouvert maintenant, fermeture à ' + fmt(until);
+        } else if (!t.closed && m < toMin(t.opens)) {
+          msg = 'Fermé, ouverture aujourd’hui à ' + fmt(t.opens);
+        } else {
+          for (var i = 1; i <= 7; i++) {
+            var n = (jour + i) % 7;
+            if (!H[n].closed) {
+              msg = 'Fermé, ouverture ' + (i === 1 ? 'demain' : JOURS[n].toLowerCase()) + ' à ' + fmt(H[n].opens);
+              break;
+            }
+          }
+        }
+        return { open: open, message: msg || 'Fermé', ligne: open ? service : jour };
+      }
+
+      function renderHours() {
+        var card = $('#hoursCard');
+        if (!card) return;
+        card.replaceChildren();
+        ORDRE.forEach(function (d) {
+          var h = H[d];
+          var row = el('div', 'hours-row');
+          row.setAttribute('data-day', String(d));
+          row.appendChild(el('span', 'hours-day', JOURS[d]));
+          row.appendChild(el('span', 'hours-time' + (h.closed ? ' hours-closed' : ''),
+            h.closed ? 'Fermé' : fmt(h.opens) + ' — ' + fmt(h.closes)));
+          card.appendChild(row);
+        });
+      }
+
+      function updateStatus() {
+        try {
+          var st = computeStatus(parisNow());
+          $('#hoursStatusText').textContent = st.message;
+          $('#hoursStatus').classList.toggle('is-open', st.open);
+          qa('.hours-today').forEach(function (r) { r.classList.remove('hours-today'); });
+          qa('.hours-today-badge').forEach(function (b) { b.remove(); });
+          var row = $('.hours-row[data-day="' + st.ligne + '"]');
+          if (row) {
+            row.classList.add('hours-today');
+            var badge = el('span', 'hours-today-badge', st.open ? 'Ouvert' : 'Aujourd’hui');
+            $('.hours-day', row).appendChild(badge);
+          }
+        } catch (err) { /* le texte statique reste affiché */ }
+      }
+
+      /* Contenu modifiable depuis la page admin */
+      function money(n) {
+        if (n === null || n === undefined || n === '') return '';
+        var v = Number(n);
+        if (!isFinite(v)) return '';
+        return (v % 1 === 0 ? String(v) : v.toFixed(2).replace('.', ',')) + ' €';
+      }
+
+      function applySettings(S) {
+        qa('[data-s]').forEach(function (n) {
+          var k = n.getAttribute('data-s');
+          if (S[k] === undefined) return;
+          n.textContent = S[k];
+          n.hidden = S[k] === '';
+        });
+
+        qa('.event-feature').forEach(function (f) {
+          var spans = qa('[data-s]', f);
+          f.hidden = spans.length > 0 && spans.every(function (n) { return n.hidden; });
+        });
+
+        var digits = String(S.phone || '').replace(/\D/g, '');
+        if (digits) {
+          var tel = 'tel:' + (digits.charAt(0) === '0' ? '+33' + digits.slice(1) : '+' + digits);
+          qa('[data-tel]').forEach(function (a) { a.href = tel; });
+        }
+
+        var adresse = ((S.address_line1 || '') + ' ' + (S.address_line2 || '')).trim();
+        if (adresse) {
+          var maps = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(adresse);
+          qa('[data-maps]').forEach(function (a) { a.href = maps; });
+        }
+
+        var bg = $('.hero-bg');
+        if (bg && S.hero_image) bg.style.backgroundImage = 'url("' + String(S.hero_image).replace(/"/g, '%22') + '")';
+
+        var img = $('#eventsImg');
+        if (img) {
+          if (S.events_image) { img.src = S.events_image; img.hidden = false; }
+          else if (S.events_image === '') { img.hidden = true; }
+        }
+      }
+
+      function renderMenu(cats, items, S) {
+        var panels = $('#menuPanels');
+        var visibles = cats.filter(function (c) {
+          return items.some(function (i) { return i.category_id === c.id && i.visible; });
+        });
+        if (!visibles.length) return;
+
+        tabsEl.replaceChildren();
+        panels.replaceChildren();
+
+        visibles.forEach(function (c, idx) {
+          var tab = el('button', 'menu-tab' + (idx === 0 ? ' active' : ''), c.name);
+          tab.type = 'button';
+          tab.id = 'tab-' + c.id;
+          tab.setAttribute('role', 'tab');
+          tab.setAttribute('aria-selected', String(idx === 0));
+          tab.setAttribute('aria-controls', 'cat-' + c.id);
+          tab.tabIndex = idx === 0 ? 0 : -1;
+          tabsEl.appendChild(tab);
+
+          var panel = el('div', 'menu-category' + (idx === 0 ? ' active' : ''));
+          panel.id = 'cat-' + c.id;
+          panel.setAttribute('role', 'tabpanel');
+          panel.setAttribute('aria-labelledby', tab.id);
+
+          if (c.show_formula && S.formula_text) {
+            var banner = el('div', 'formula-banner');
+            var content = el('div', 'formula-content');
+            content.appendChild(el('h3', '', S.formula_title || 'La formule'));
+            content.appendChild(el('p', '', S.formula_text));
+            banner.appendChild(content);
+            var prix = money(S.formula_price);
+            if (prix) banner.appendChild(el('div', 'formula-badge chasse-fixe', prix));
+            panel.appendChild(banner);
+          }
+
+          var grid = el('div', 'menu-grid');
+          items.filter(function (i) { return i.category_id === c.id && i.visible; }).forEach(function (it) {
+            var card = el('div', 'menu-item fade-up');
+            if (it.image_url) {
+              var img = document.createElement('img');
+              img.className = 'menu-item-img';
+              img.src = it.image_url;
+              img.alt = it.name;
+              img.width = 90;
+              img.height = 90;
+              img.loading = 'lazy';
+              img.decoding = 'async';
+              img.onerror = function () { img.remove(); };
+              card.appendChild(img);
+            }
+            var info = el('div', 'menu-item-info');
+            var head = el('div', 'menu-item-header');
+            head.appendChild(el('div', 'menu-item-name', it.name));
+            var p = money(it.price);
+            if (p) head.appendChild(el('div', 'menu-item-price chasse-fixe', p));
+            info.appendChild(head);
+            if (it.description) info.appendChild(el('p', 'menu-item-desc', it.description));
+            card.appendChild(info);
+            grid.appendChild(card);
+          });
+          panel.appendChild(grid);
+
+          if (c.show_alcohol && S.alcohol_note) panel.appendChild(el('p', 'legal-note', S.alcohol_note));
+          panels.appendChild(panel);
+        });
+        observeReveals(panels);
+      }
+
+      function renderGallery(photos) {
+        var section = $('#galerie');
+        var grid = $('#galerieGrid');
+        var vide = photos.length === 0;
+        section.hidden = vide;
+        qa('a[href="#galerie"]').forEach(function (a) { a.hidden = vide; });
+        if (vide) return;
+        grid.replaceChildren();
+        photos.forEach(function (p) {
+          var box = el('div', 'galerie-item fade-up');
+          var img = document.createElement('img');
+          img.src = p.url;
+          img.alt = p.alt || '';
+          img.width = 800;
+          img.height = 600;
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          img.onerror = function () { box.remove(); };
+          box.appendChild(img);
+          grid.appendChild(box);
+        });
+        observeReveals(grid);
+      }
+
+      /* Chargement des données Supabase (lecture publique) */
+      var CFG = window.ESCALE_CONFIG;
+      function get(table, query) {
+        var headers = { apikey: CFG.SUPABASE_ANON_KEY };
+        if (/^eyJ/.test(CFG.SUPABASE_ANON_KEY)) headers.Authorization = 'Bearer ' + CFG.SUPABASE_ANON_KEY;
+        var ctl = 'AbortController' in window ? new AbortController() : null;
+        var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 6000);
+        return fetch(CFG.SUPABASE_URL.replace(/\/$/, '') + '/rest/v1/' + table + '?' + query, {
+          headers: headers, signal: ctl ? ctl.signal : undefined
+        }).then(function (r) {
+          clearTimeout(timer);
+          if (!r.ok) throw new Error(String(r.status));
+          return r.json();
+        });
+      }
+
+      function safe(fn) { try { fn(); } catch (err) { /* un bloc en échec ne bloque pas les autres */ } }
+
+      function loadData() {
+        return Promise.all([
+          get('site_settings', 'select=key,value'),
+          get('menu_categories', 'select=*&order=position'),
+          get('menu_items', 'select=*&order=position'),
+          get('opening_hours', 'select=*'),
+          get('gallery_photos', 'select=*&order=position')
+        ]).then(function (r) {
+          var S = {};
+          r[0].forEach(function (x) { S[x.key] = x.value; });
+          safe(function () { applySettings(S); });
+          safe(function () { renderMenu(r[1], r[2], S); });
+          safe(function () {
+            r[3].forEach(function (row) {
+              H[row.day] = { closed: row.closed, opens: row.opens, closes: row.closes };
+            });
+            renderHours();
+            updateStatus();
+          });
+          safe(function () { renderGallery(r[4]); });
+        });
+      }
+
+      renderHours();
+      updateStatus();
+      setInterval(updateStatus, 60000);
+
+      if (CFG && CFG.SUPABASE_URL && CFG.SUPABASE_ANON_KEY && !/VOTRE/.test(CFG.SUPABASE_URL)) {
+        loadData().catch(function () { /* contenu statique conservé */ });
+      }
+
+      /* Carte : chargée après clic */
+      var mapBtn = document.getElementById('mapLoad');
+      if (mapBtn) {
+        mapBtn.addEventListener('click', function () {
+          var card = document.getElementById('mapCard');
+          var frame = document.createElement('iframe');
+          frame.src = card.getAttribute('data-src');
+          frame.title = 'Plan d’accès à L’Escale 241, Poitiers';
+          frame.loading = 'lazy';
+          frame.referrerPolicy = 'no-referrer-when-downgrade';
+          frame.setAttribute('allowfullscreen', '');
+          card.replaceChildren(frame);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
