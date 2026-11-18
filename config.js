@@ -5,6 +5,6 @@
   Ne mettez jamais ici la clé "service_role" ou "secret".
 */
 window.ESCALE_CONFIG = {
-  SUPABASE_URL: 'https://rkykwxxrlrzmmtulndky.supabase.co ',
-  SUPABASE_ANON_KEY: 'sb_publishable_pPyKwFjGl_-JvdxYe8b6kg_3YAQivlE '
+  SUPABASE_URL: 'https://rkykwxxrlrzmmtulndky.supabase.co',
+  SUPABASE_ANON_KEY: 'sb_publishable_pPyKwFjGl_-JvdxYe8b6kg_3YAQivlE'
 };
